@@ -1,0 +1,8 @@
+Id=System.Int32
+ColumnName=System.String
+Description=System.String
+NotNull=System.String
+Size=System.Int32
+TableName=System.String
+ColumnNameFull=System.String
+IsNull=System.Boolean
