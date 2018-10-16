@@ -9,9 +9,8 @@ namespace JS.CodeGenerator.Common
 {
     public class Table
     {
-        [Key]
         public string TableName { get; set; }
 
-        public ICollection<ColumnTable> Columns { get; set; }
+        //public ICollection<ColumnTable> Columns { get; set; }
     }
 }

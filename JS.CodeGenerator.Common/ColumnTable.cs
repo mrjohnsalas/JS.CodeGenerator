@@ -9,23 +9,32 @@ namespace JS.CodeGenerator.Common
 {
     public class ColumnTable
     {
-        [Key]
         public int Id { get; set; }
 
-        public string ColumnName { get; set; }
+        public string SqlTableName { get; set; }
 
-        public string Description { get; set; }
+        public string SqlColumnName { get; set; }
 
-        public string NotNull { get; set; }
+        public string SapDescription { get; set; }
 
-        public int Size { get; set; }
+        public string SqlDataType { get; set; }
 
-        public string TableName { get; set; }
+        public string SapDataType { get; set; }
 
-        public string ColumnNameFull => $"@{ColumnName}";
+        public string SapDataType2 { get; set; }
 
-        public bool IsNull => NotNull.Equals("N");
+        public int SqlSize { get; set; }
 
-        public Table Table { get; set; }
+        public int SqlPrecision { get; set; }
+
+        public int NullValue { get; set; }
+
+        public bool IsNull => NullValue.Equals(1);
+
+        public string SqlTableNameS => SqlTableName.Replace("@", "");
+
+        public string PropertyName { get; set; }
+
+        public string PropertyType { get; set; }
     }
 }

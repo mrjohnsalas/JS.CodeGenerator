@@ -18,7 +18,7 @@ namespace JS.CodeGenerator.Data
 
         public RepositoryGenerator(string sqlTableName, string className, int spMax)
         {
-            this.SqlTableName = sqlTableName;
+            this.SqlTableName = sqlTableName.Replace("@", "");
             this.ClassName = className;
             this.SpMax = spMax;
         }
@@ -50,6 +50,7 @@ namespace JS.CodeGenerator.Data
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}var qry = qb.BuildQuery();");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}return SapDbHelper.GetValue<int>(qry, \"Id\");");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "}");
+            code.Append(Common.NamePrefixes.NewLine);
 
             //----ADD GET
             code.AppendLine($"{Common.NamePrefixes.DoubleTab}public static {ClassName} Get{ClassName}ById(int id)");
@@ -59,6 +60,7 @@ namespace JS.CodeGenerator.Data
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}var qry = qb.BuildQuery();");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}return SapDbHelper.GetObject<{ClassName}>(qry);");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "}");
+            code.Append(Common.NamePrefixes.NewLine);
 
             //----ADD GET ALL
             code.AppendLine($"{Common.NamePrefixes.DoubleTab}public static IEnumerable<{ClassName}> Get{ClassName}s()");
@@ -67,25 +69,28 @@ namespace JS.CodeGenerator.Data
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}var qry = qb.BuildQuery();");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}return SapDbHelper.GetObjects<{ClassName}>(qry);");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "}");
+            code.Append(Common.NamePrefixes.NewLine);
 
             //----ADD INSERT
             code.AppendLine($"{Common.NamePrefixes.DoubleTab}public static void {ClassName}Insert({ClassName} {Common.NamePrefixes.PrincipalParameterNamePrefix})");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "{");
-            code.AppendLine($"{Common.NamePrefixes.ThreeTab}obj.StatusType = StatusType.Activo;");
+            code.AppendLine($"{Common.NamePrefixes.ThreeTab}{Common.NamePrefixes.PrincipalParameterNamePrefix}.Status = (int)Enums.NewStatusType.Activo;");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}SapDbHelper.UTableObject(\"{SqlTableName}\", SapDbHelper.ActionTable.Insert, GetNewId().ToString(), {Common.NamePrefixes.PrincipalParameterNamePrefix});");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "}");
+            code.Append(Common.NamePrefixes.NewLine);
 
             //----ADD UPDATE
             code.AppendLine($"{Common.NamePrefixes.DoubleTab}public static void {ClassName}Update({ClassName} {Common.NamePrefixes.PrincipalParameterNamePrefix})");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "{");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}SapDbHelper.UTableObject(\"{SqlTableName}\", SapDbHelper.ActionTable.Update, obj.Id.ToString(), {Common.NamePrefixes.PrincipalParameterNamePrefix});");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "}");
+            code.Append(Common.NamePrefixes.NewLine);
 
             //----ADD DELETE
             code.AppendLine($"{Common.NamePrefixes.DoubleTab}public static void {ClassName}DeleteById(int id)");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "{");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}var {Common.NamePrefixes.PrincipalParameterNamePrefix} = Get{ClassName}ById(id);");
-            code.AppendLine($"{Common.NamePrefixes.ThreeTab}{Common.NamePrefixes.PrincipalParameterNamePrefix}.StatusType = StatusType.Inactivo;");
+            code.AppendLine($"{Common.NamePrefixes.ThreeTab}{Common.NamePrefixes.PrincipalParameterNamePrefix}.Status = (int)Enums.NewStatusType.Anulado;");
             code.AppendLine($"{Common.NamePrefixes.ThreeTab}SapDbHelper.UTableObject(\"{SqlTableName}\", SapDbHelper.ActionTable.Update, {Common.NamePrefixes.PrincipalParameterNamePrefix}.Id.ToString(), {Common.NamePrefixes.PrincipalParameterNamePrefix});");
             code.AppendLine(Common.NamePrefixes.DoubleTab + "}");
 

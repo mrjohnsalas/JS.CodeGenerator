@@ -48,9 +48,9 @@ namespace JS.CodeGenerator.Data
 
         public string GetColumns()
         {
-            var columns = "T0.Code, T0.Name, ";
+            var columns = string.Empty;
             foreach (var column in GetColumnsByTableName())
-                columns += $"T0.{column}, ";
+                columns += $"T0.{column.SqlColumnName}, ";
             return columns.Substring(0, columns.Length - 2);
         }
 
@@ -60,8 +60,9 @@ namespace JS.CodeGenerator.Data
 
             code.AppendLine($"CREATE PROCEDURE [dbo].[GP_WEB_APP_{spId}]");
             code.AppendLine("AS");
-            code.AppendLine($"SELECT ISNULL(MAX(CONVERT(INT, T0.Code)), 0) + 1 AS Id FROM [@{SqlTableName}] T0");
+            code.AppendLine($"SELECT ISNULL(MAX(CONVERT(INT, T0.Code)), 0) + 1 AS Id FROM [{SqlTableName}] T0");
             code.AppendLine("GO");
+            code.Append(Common.NamePrefixes.NewLine);
 
             return code.ToString();
         }
@@ -73,8 +74,9 @@ namespace JS.CodeGenerator.Data
             code.AppendLine($"CREATE PROCEDURE [dbo].[GP_WEB_APP_{spId}]");
             code.AppendLine($"{Common.NamePrefixes.Tab}@ID AS NVARCHAR(30)");
             code.AppendLine("AS");
-            code.AppendLine($"SELECT {GetColumns()} FROM [@{SqlTableName}] T0 WHERE T0.Code = @ID");
+            code.AppendLine($"SELECT {GetColumns()} FROM [{SqlTableName}] T0 WHERE T0.Code = @ID");
             code.AppendLine("GO");
+            code.Append(Common.NamePrefixes.NewLine);
 
             return code.ToString();
         }
@@ -85,8 +87,9 @@ namespace JS.CodeGenerator.Data
 
             code.AppendLine($"CREATE PROCEDURE [dbo].[GP_WEB_APP_{spId}]");
             code.AppendLine("AS");
-            code.AppendLine($"SELECT {GetColumns()} FROM [@{SqlTableName}] T0");
+            code.AppendLine($"SELECT {GetColumns()} FROM [{SqlTableName}] T0");
             code.AppendLine("GO");
+            code.Append(Common.NamePrefixes.NewLine);
 
             return code.ToString();
         }

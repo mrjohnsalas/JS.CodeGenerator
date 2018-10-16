@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JS.CodeGenerator.Data", "JS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JS.CodeGenerator.Common", "JS.CodeGenerator.Common\JS.CodeGenerator.Common.csproj", "{A3C73AEE-B4A2-4CE9-8628-E3EE4AC8D3AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JS.CodeGenerator.Win", "JS.CodeGenerator.Win\JS.CodeGenerator.Win.csproj", "{F55304D0-3D14-4893-99A3-E0159EBCF4D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A3C73AEE-B4A2-4CE9-8628-E3EE4AC8D3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3C73AEE-B4A2-4CE9-8628-E3EE4AC8D3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3C73AEE-B4A2-4CE9-8628-E3EE4AC8D3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F55304D0-3D14-4893-99A3-E0159EBCF4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F55304D0-3D14-4893-99A3-E0159EBCF4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F55304D0-3D14-4893-99A3-E0159EBCF4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F55304D0-3D14-4893-99A3-E0159EBCF4D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
